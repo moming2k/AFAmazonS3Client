@@ -319,13 +319,9 @@ NSString * AFBase64EncodedStringFromData(NSData *data) {
             [formData appendPartWithFormData:[[filePath lastPathComponent] dataUsingEncoding:NSUTF8StringEncoding] name:@"key"];
             [formData appendPartWithFileData:data name:@"file" fileName:[filePath lastPathComponent] mimeType:[response MIMEType]];
         }];
-<<<<<<< HEAD
-        [self authorizeRequest:request withPath:destinationPath];
 
-=======
         [self appendAuthorizationHeaderToRequest:request];
 		
->>>>>>> a0aa8d044b2ac408791481f99daf8e856765dfe9
         AFHTTPRequestOperation *requestOperation = [self HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
             if (success) {
                 success(responseObject);
@@ -343,7 +339,6 @@ NSString * AFBase64EncodedStringFromData(NSData *data) {
 }
 
 #pragma mark - AFHTTPClient
-
 
 - (NSMutableURLRequest *)requestWithMethod:(NSString *)method path:(NSString *)path parameters:(NSDictionary *)parameters {
 	NSMutableURLRequest *request = [super requestWithMethod:method path:path parameters:parameters];
