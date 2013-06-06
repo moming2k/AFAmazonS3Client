@@ -145,7 +145,7 @@
  @param failure A block object to be executed when the request operation finishes unsuccessfully, or that finishes successfully, but encountered an error while parsing the response data. This block has no return value and takes a single argument: the `NSError` object describing error that occurred.
  */
 - (void)getObjectWithPath:(NSString *)path
-                 progress:(void (^)(NSInteger bytesRead, NSInteger totalBytesRead, NSInteger totalBytesExpectedToRead))progress
+                 progress:(void (^)(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead))progress
                   success:(void (^)(id responseObject, NSData *responseData))success
                   failure:(void (^)(NSError *error))failure;
 
@@ -160,7 +160,7 @@
  */
 - (void)getObjectWithPath:(NSString *)path
              outputStream:(NSOutputStream *)outputStream
-                 progress:(void (^)(NSInteger bytesRead, NSInteger totalBytesRead, NSInteger totalBytesExpectedToRead))progress
+                 progress:(void (^)(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead))progress
                   success:(void (^)(id responseObject))success
                   failure:(void (^)(NSError *error))failure;
 
@@ -177,7 +177,7 @@
 - (void)postObjectWithFile:(NSString *)path
            destinationPath:(NSString *)destinationPath
                 parameters:(NSDictionary *)parameters
-                  progress:(void (^)(NSInteger bytesWritten, NSInteger totalBytesWritten, NSInteger totalBytesExpectedToWrite))progress
+                  progress:(void (^)(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite))progress
                    success:(void (^)(id responseObject))success
                    failure:(void (^)(NSError *error))failure;
 
@@ -194,7 +194,7 @@
 - (void)putObjectWithFile:(NSString *)path
           destinationPath:(NSString *)destinationPath
                parameters:(NSDictionary *)parameters
-                 progress:(void (^)(NSInteger bytesWritten, NSInteger totalBytesWritten, NSInteger totalBytesExpectedToWrite))progress
+                 progress:(void (^)(NSUInteger bytesWritten, long long totalBytesWritten, long long  totalBytesExpectedToWrite))progress
                   success:(void (^)(id responseObject))success
                   failure:(void (^)(NSError *error))failure;
 

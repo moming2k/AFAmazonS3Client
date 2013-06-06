@@ -91,7 +91,7 @@ NSString * AFBase64EncodedStringFromData(NSData *data) {
                        file:(NSString *)filePath
             destinationPath:(NSString *)destinationPath
                  parameters:(NSDictionary *)parameters
-                   progress:(void (^)(NSInteger bytesWritten, NSInteger totalBytesWritten, NSInteger totalBytesExpectedToWrite))progressBlock
+                   progress:(void (^)(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite))progressBlock
                     success:(void (^)(id responseObject))success
                     failure:(void (^)(NSError *error))failure;
 @end
@@ -227,7 +227,7 @@ NSString * AFBase64EncodedStringFromData(NSData *data) {
 }
 
 - (void)getObjectWithPath:(NSString *)path
-                 progress:(void (^)(NSInteger bytesRead, NSInteger totalBytesRead, NSInteger totalBytesExpectedToRead))progress
+                 progress:(void (^)(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead))progress
                   success:(void (^)(id responseObject, NSData *responseData))success
                   failure:(void (^)(NSError *error))failure
 {
@@ -250,7 +250,7 @@ NSString * AFBase64EncodedStringFromData(NSData *data) {
 
 - (void)getObjectWithPath:(NSString *)path
              outputStream:(NSOutputStream *)outputStream
-                 progress:(void (^)(NSInteger bytesRead, NSInteger totalBytesRead, NSInteger totalBytesExpectedToRead))progress
+                 progress:(void (^)(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead))progress
                   success:(void (^)(id responseObject))success
                   failure:(void (^)(NSError *error))failure
 {
@@ -275,7 +275,7 @@ NSString * AFBase64EncodedStringFromData(NSData *data) {
 - (void)postObjectWithFile:(NSString *)path
            destinationPath:(NSString *)destinationPath
                 parameters:(NSDictionary *)parameters
-                  progress:(void (^)(NSInteger bytesWritten, NSInteger totalBytesWritten, NSInteger totalBytesExpectedToWrite))progress
+                  progress:(void (^)(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite))progress
                    success:(void (^)(id responseObject))success
                    failure:(void (^)(NSError *error))failure
 {
@@ -285,7 +285,7 @@ NSString * AFBase64EncodedStringFromData(NSData *data) {
 - (void)putObjectWithFile:(NSString *)path
           destinationPath:(NSString *)destinationPath
                parameters:(NSDictionary *)parameters
-                 progress:(void (^)(NSInteger bytesWritten, NSInteger totalBytesWritten, NSInteger totalBytesExpectedToWrite))progress
+                 progress:(void (^)(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite))progress
                   success:(void (^)(id responseObject))success
                   failure:(void (^)(NSError *error))failure
 {
@@ -303,7 +303,7 @@ NSString * AFBase64EncodedStringFromData(NSData *data) {
                        file:(NSString *)filePath
             destinationPath:(NSString *)destinationPath
                  parameters:(NSDictionary *)parameters
-                   progress:(void (^)(NSInteger bytesWritten, NSInteger totalBytesWritten, NSInteger totalBytesExpectedToWrite))progress
+                   progress:(void (^)(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite))progress
                     success:(void (^)(id responseObject))success
                     failure:(void (^)(NSError *error))failure
 {
