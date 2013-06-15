@@ -289,7 +289,31 @@ NSString * AFBase64EncodedStringFromData(NSData *data) {
                   success:(void (^)(id responseObject))success
                   failure:(void (^)(NSError *error))failure
 {
-    [self setObjectWithMethod:@"PUT" file:path destinationPath:destinationPath parameters:parameters progress:progress success:success failure:failure];
+//    [self setObjectWithMethod:@"PUT" file:path destinationPath:destinationPath parameters:parameters progress:progress success:success failure:failure];
+  NSMutableURLRequest *filerequest = [NSMutableURLRequest requestWithURL:[NSURL fileURLWithPath:path]];
+  [filerequest setCachePolicy:NSURLCacheStorageNotAllowed];
+
+  NSURLResponse *response = nil;
+  NSError *error = nil;
+  NSData *data = [NSURLConnection sendSynchronousRequest:filerequest returningResponse:&response error:&error];
+
+  if (data && response) {
+    NSMutableURLRequest *request = [self requestWithMethod:@"PUT" path:destinationPath parameters:nil];
+    [request setHTTPBody:data];
+
+    AFHTTPRequestOperation *requestOperation = [self HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
+      if (success) {
+        success(responseObject);
+      }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+      if (failure) {
+        failure(error);
+      }
+    }];
+
+    [requestOperation setUploadProgressBlock:progress];
+    [self enqueueHTTPRequestOperation:requestOperation];
+  }
 }
 
 - (void)deleteObjectWithPath:(NSString *)path
@@ -342,6 +366,7 @@ NSString * AFBase64EncodedStringFromData(NSData *data) {
 
 - (NSMutableURLRequest *)requestWithMethod:(NSString *)method path:(NSString *)path parameters:(NSDictionary *)parameters {
 	NSMutableURLRequest *request = [super requestWithMethod:method path:path parameters:parameters];
+  [request setValue:@"public-read" forHTTPHeaderField:@"x-amz-acl"];
 	[self appendAuthorizationHeaderToRequest:request];
 	return request;
 }
